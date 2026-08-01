@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -17,7 +19,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "orders")
+    @OneToMany
+    @JoinTable(name = "orders_tickets",
+        joinColumns = @JoinColumn(name = "order_id"),
+        inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private List<Ticket> tickets;
     private LocalDateTime orderDate;
     @ManyToOne
@@ -57,22 +62,24 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Order order)) return false;
-        return Objects.equals(id, order.id) && Objects.equals(tickets, order.tickets) && Objects.equals(orderDate, order.orderDate) && Objects.equals(user, order.user);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id != null && id.equals(order.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tickets, orderDate, user);
+        return getClass().hashCode();
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", tickets=" + tickets +
-                ", orderDate=" + orderDate +
-                ", user=" + user +
-                '}';
+        return "Order{"
+                + "id=" + id
+                + ", tickets=" + tickets
+                + ", orderDate=" + orderDate
+                + ", userId=" + (user != null ? user.getId() : null)
+                + '}';
     }
 }
