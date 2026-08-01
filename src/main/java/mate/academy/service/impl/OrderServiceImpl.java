@@ -3,7 +3,6 @@ package mate.academy.service.impl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import mate.academy.dao.OrderDao;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
@@ -19,21 +18,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
     @Inject
     private ShoppingCartService shoppingCartService;
-
-    @Override
-    public Order add(Order order) {
-        return orderDao.add(order);
-    }
-
-    @Override
-    public Optional<Order> get(Long id) {
-        return orderDao.get(id);
-    }
-
-    @Override
-    public List<Order> getAll() {
-        return orderDao.getAll();
-    }
 
     @Override
     public List<Order> getOrdersHistory(User user) {

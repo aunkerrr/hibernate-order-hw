@@ -53,8 +53,8 @@ public class ShoppingCart {
     public String toString() {
         return "ShoppingCart{"
             + "id=" + id
-            + ", ticketsId=" + (tickets != null ?
-                tickets.stream().map(Ticket::getId).toList() : null)
+            + ", ticketsId=" + (tickets != null
+                ? tickets.stream().map(Ticket::getId).toList() : null)
             + ", userId=" + (user != null ? user.getId() : null)
             + '}';
     }

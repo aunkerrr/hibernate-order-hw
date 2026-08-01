@@ -37,7 +37,8 @@ public class Main {
         secondCinemaHall.setCapacity(200);
         secondCinemaHall.setDescription("second hall with capacity 200");
 
-        CinemaHallService cinemaHallService = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+        CinemaHallService cinemaHallService = (CinemaHallService)
+                injector.getInstance(CinemaHallService.class);
         cinemaHallService.add(firstCinemaHall);
         cinemaHallService.add(secondCinemaHall);
 
@@ -54,7 +55,8 @@ public class Main {
         yesterdayMovieSession.setMovie(fastAndFurious);
         yesterdayMovieSession.setShowTime(LocalDateTime.now().minusDays(1L));
 
-        MovieSessionService movieSessionService = (MovieSessionService) injector.getInstance(MovieSessionService.class);
+        MovieSessionService movieSessionService = (MovieSessionService)
+                injector.getInstance(MovieSessionService.class);
         movieSessionService.add(tomorrowMovieSession);
         movieSessionService.add(yesterdayMovieSession);
 
@@ -62,7 +64,8 @@ public class Main {
         System.out.println(movieSessionService.findAvailableSessions(
                         fastAndFurious.getId(), LocalDate.now()));
 
-        AuthenticationService authenticationService = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        AuthenticationService authenticationService = (AuthenticationService)
+                injector.getInstance(AuthenticationService.class);
         User bob = null;
         try {
             bob = authenticationService.register("bob@example.com", "1234");
@@ -76,7 +79,8 @@ public class Main {
             }
         }
 
-        ShoppingCartService cartService = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCartService cartService = (ShoppingCartService)
+                injector.getInstance(ShoppingCartService.class);
         cartService.addSession(tomorrowMovieSession, bob);
         cartService.addSession(yesterdayMovieSession, bob);
         ShoppingCart bobCart = cartService.getByUser(bob);
@@ -84,7 +88,8 @@ public class Main {
         System.out.println("Bob's cart before order: "
                 + bobCart.getTickets());
 
-        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+        OrderService orderService = (OrderService)
+                injector.getInstance(OrderService.class);
         orderService.completeOrder(bobCart);
 
         System.out.println("Order completed successfully.");

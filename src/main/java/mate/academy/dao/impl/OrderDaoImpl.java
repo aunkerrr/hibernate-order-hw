@@ -41,8 +41,8 @@ public class OrderDaoImpl implements OrderDao {
     public Optional<Order> get(Long id) {
         try (Session session = HibernateUtil
                 .getSessionFactory()
-                .openSession()){
-        return session.createQuery("From Order o where "
+                .openSession()) {
+            return session.createQuery("From Order o where "
                 + "id = :id", Order.class).setParameter("id", id)
                 .uniqueResultOptional();
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getAll() {
         try (Session session = HibernateUtil
                 .getSessionFactory()
-                .openSession()){
+                .openSession()) {
             return session.createQuery("From Order o",
                     Order.class).getResultList();
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getByUser(User user) {
         try (Session session = HibernateUtil
                 .getSessionFactory()
-                .openSession()){
+                .openSession()) {
             return session.createQuery("select distinct o From Order o "
                             + "left join fetch o.user "
                                     + "left join fetch o.tickets "
@@ -75,8 +75,8 @@ public class OrderDaoImpl implements OrderDao {
                     Order.class).setParameter("user", user)
                     .getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all " +
-                    "Orders of current user.", e);
+            throw new DataProcessingException("Can't get all "
+                    + "Orders of current user.", e);
         }
     }
 }
